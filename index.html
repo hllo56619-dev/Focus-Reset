@@ -25,6 +25,7 @@ h1{font-size:clamp(29px,5vw,43px);line-height:1.08;letter-spacing:-.045em;margin
 <section class="hero"><small>TỔNG TIẾN ĐỘ</small><strong><span id="percent">0</span>% hoàn thành</strong><small id="totalText">0 / 0 nhiệm vụ</small><div class="bar"><i id="bar"></i></div></section>
 <div class="stats"><div class="stat"><span>Ngày đang xem</span><b id="dayTitle">Ngày 1 / 14</b></div><div class="stat"><span>Số ngày đã bắt đầu</span><b id="daysDone">0 / 14</b></div></div>
 <section class="panel"><div class="panelhead"><h2>Chọn ngày</h2><span class="muted">Chạm để xem / sửa</span></div><div class="days" id="days"></div></section>
+<section class="panel daily-tip" aria-live="polite"><div class="panelhead"><h2>🌱 Mẹo nhỏ hôm nay</h2><span class="muted" id="tipDay">Ngày 1</span></div><p id="dailyTipText" style="margin:0;font-size:14px;line-height:1.7"></p></section>
 <div id="categories"></div>
 <section class="panel">
 <div class="panelhead"><h2>Đánh giá cuối ngày</h2><span class="muted">Ghi nhận, không phán xét</span></div>
@@ -65,6 +66,7 @@ const groups=[
 ],note:"Mẹo: Khi đầu óc bắt đầu nghĩ sang việc khác, ghi nhanh suy nghĩ đó ra giấy rồi quay lại đúng nhiệm vụ đang làm."}
 
 ];
+const dailyTips=["Quy tắc 2 phút: Nếu bạn ngại bắt đầu, hãy làm nhiệm vụ chỉ trong 2 phút. Mục tiêu lúc này là bắt đầu, không phải hoàn thành tất cả.","Để điện thoại ngoài tầm với: Đặt điện thoại ở另一 phòng hoặc trong ngăn kéo khi học. Muốn kiểm tra điện thoại, bạn sẽ phải chủ động đứng dậy.","Chuẩn bị trước khi ngủ: Mở sẵn sách, tài liệu và ghi việc đầu tiên cần làm vào giấy. Sáng hôm sau bạn không phải mất thời gian quyết định.","Khi bị xao nhãng: Đừng tự trách mình. Ghi lại điều vừa xuất hiện trong đầu, đánh dấu để xử lý sau rồi nhẹ nhàng quay lại việc đang làm.","Tự kiểm tra thay vì đọc lại: Sau khi học một phần, đóng tài liệu và thử tự nói hoặc viết ra 3 ý mình vừa nhớ được.","Nghỉ giải lao thật sự: Trong 5 phút nghỉ, hãy đứng lên, nhìn ra xa hoặc đi lại. Tránh mở video ngắn vì rất dễ kéo dài thời gian nghỉ.","Chia nhỏ việc khó: Đổi mục tiêu mơ hồ như “học Toán” thành việc cụ thể như “làm câu 1 và kiểm tra lời giải”. Việc rõ ràng sẽ dễ bắt đầu hơn.","Thử quy tắc một tab: Chỉ giữ tài liệu đang dùng trên màn hình. Nếu cần tra cứu, làm xong rồi đóng trang vừa mở trước khi chuyển việc.","Ánh sáng buổi sáng: Sau khi thức dậy, dành vài phút ở nơi có ánh sáng tự nhiên. Đừng nhìn thẳng vào mặt trời.","Viết ra điều đang lo: Nếu một suy nghĩ cứ lặp lại, dành 3 phút ghi nó ra giấy và viết bước nhỏ nhất bạn có thể làm. Nếu chưa giải quyết được, tạm để đó.","Đặt giờ kết thúc: Trước phiên học, xác định thời điểm dừng. Biết phiên học có điểm kết thúc giúp bạn dễ bắt đầu và nghỉ ngơi đúng lúc.","Ôn lại có khoảng cách: Thử xem lại kiến thức sau một ngày, rồi vài ngày sau. Tự nhớ lại trước khi xem đáp án sẽ hiệu quả hơn chỉ đọc lướt.","Giữ bàn học sẵn sàng: Trước khi bắt đầu, chỉ để trên bàn những thứ cần cho nhiệm vụ hiện tại. Bớt đồ gây chú ý sẽ bớt phải đấu tranh với chúng.","Kết thúc ngày bằng một dòng: Ghi lại một việc bạn đã làm được hôm nay và việc đầu tiên sẽ làm ngày mai. Tiến bộ nhỏ vẫn là tiến bộ."];
 const KEY="focus-reset-categories-v2",ids=groups.flatMap((g,gi)=>g.tasks.map((_,ti)=>`g${gi}t${ti}`));
 let store=JSON.parse(localStorage.getItem(KEY)||"{}"),current=1;
 const el=id=>document.getElementById(id);
@@ -73,7 +75,7 @@ function save(){localStorage.setItem(KEY,JSON.stringify(store));render()}
 function render(){
  el("days").innerHTML="";
  for(let i=1;i<=14;i++){let b=document.createElement("button");b.className="day"+(i===current?" active":"")+(store[i]&&ids.some(id=>store[i].checks?.[id])?" done":"");b.textContent=i;b.onclick=()=>{saveFields(false);current=i;render()};el("days").append(b)}
- el("dayTitle").textContent=`Ngày ${current} / 14`;
+ el("dayTitle").textContent=`Ngày ${current} / 14`;el("tipDay").textContent=`Ngày ${current}`;el("dailyTipText").textContent=dailyTips[current-1];
  let done=0;for(let d=1;d<=14;d++)done+=ids.filter(id=>store[d]?.checks?.[id]).length;
  let total=ids.length*14,p=Math.round(done/total*100);el("percent").textContent=p;el("bar").style.width=p+"%";el("totalText").textContent=`${done} / ${total} nhiệm vụ đã hoàn thành`;el("daysDone").textContent=Object.keys(store).filter(k=>ids.some(id=>store[k].checks?.[id])).length+" / 14";
  const d=getDay();el("categories").innerHTML="";
