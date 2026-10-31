@@ -55,7 +55,16 @@ const groups=[
 ],note:"Một mẹo hữu ích: Trước khi học, viết ra đúng 3 việc quan trọng nhất cần hoàn thành trong ngày. Đừng lập danh sách 20 việc khiến bản thân thêm áp lực."},
 {title:"5. Cải thiện sức khỏe thể chất",desc:"Chăm sóc cơ thể để hỗ trợ sự tỉnh táo và khả năng tập trung.",icon:"🚶",tasks:[
 ["Vận động 20–30 phút mỗi ngày",""],["Tiếp xúc ánh sáng tự nhiên vào buổi sáng",""],["Ăn đủ bữa, không bỏ bữa sáng",""],["Uống đủ nước",""],["Hạn chế ngồi liên tục nhiều giờ",""]
-]}
+]},
+{title:"6. Nâng cao hiệu quả học tập",desc:"Học chủ động, hiểu sâu và ghi nhớ lâu hơn.",icon:"✍️",tasks:[
+["Đặt mục tiêu cụ thể cho mỗi buổi học","Ví dụ: làm xong 5 bài toán hoặc hiểu một phần kiến thức."],
+["Chủ động nhớ lại kiến thức thay vì chỉ đọc lại","Gấp sách và thử tự trình bày những gì vừa học."],
+["Làm bài tập để kiểm tra mức độ hiểu","Ưu tiên tự làm trước khi xem lời giải."],
+["Ghi lại lỗi sai và lý do mắc lỗi","Tạo một danh sách lỗi thường gặp để xem lại."],
+["Ôn lại kiến thức cũ theo từng khoảng thời gian","Ôn ngắn vào ngày hôm sau, vài ngày sau và cuối tuần."],
+["Bắt đầu bằng phần khó hoặc quan trọng nhất","Chọn lúc tỉnh táo nhất để xử lý nội dung cần nhiều suy nghĩ."]
+],note:"Mẹo: Sau mỗi buổi học, thử đóng tài liệu và tự trả lời: “Mình vừa học được gì? Phần nào mình vẫn chưa hiểu?”"}
+
 ];
 const KEY="focus-reset-categories-v2",ids=groups.flatMap((g,gi)=>g.tasks.map((_,ti)=>`g${gi}t${ti}`));
 let store=JSON.parse(localStorage.getItem(KEY)||"{}"),current=1;
