@@ -27,16 +27,6 @@ h1{font-size:clamp(29px,5vw,43px);line-height:1.08;letter-spacing:-.045em;margin
 <section class="panel"><div class="panelhead"><h2>Chọn ngày</h2><span class="muted">Chạm để xem / sửa</span></div><div class="days" id="days"></div></section>
 <div id="categories"></div>
 <section class="panel">
-<div class="panelhead"><h2>Nhật ký đọc sách</h2><span class="muted">Theo dõi riêng từng ngày</span></div>
-<div class="fields">
-<div class="field"><label for="bookTitle">Tên sách đang đọc</label><input id="bookTitle" type="text" placeholder="Ví dụ: Đắc nhân tâm"></div>
-<div class="field"><label for="readPages">Số trang đã đọc</label><input id="readPages" type="number" min="0" step="1" placeholder="Ví dụ: 12"></div>
-<div class="field"><label for="readMinutes">Thời gian đọc (phút)</label><input id="readMinutes" type="number" min="0" step="1" placeholder="Ví dụ: 15"></div>
-<div class="field"><label for="readingMood">Mức độ tập trung khi đọc (1–5)</label><input id="readingMood" type="number" min="1" max="5" placeholder="1 đến 5"></div>
-<div class="field" style="grid-column:1/-1"><label for="takeaway">Một điều đáng nhớ sau khi đọc</label><textarea id="takeaway" placeholder="Ghi ngắn gọn điều bạn học được hoặc suy nghĩ của mình..."></textarea></div>
-</div><div class="actions"><button class="primary" id="saveReading">Lưu nhật ký đọc sách</button></div>
-</section>
-<section class="panel">
 <div class="panelhead"><h2>Đánh giá cuối ngày</h2><span class="muted">Ghi nhận, không phán xét</span></div>
 <div class="fields">
 <div class="field"><label for="focus">Tập trung (1–5)</label><input id="focus" type="number" min="1" max="5" placeholder="1 đến 5"></div>
@@ -51,45 +41,21 @@ h1{font-size:clamp(29px,5vw,43px);line-height:1.08;letter-spacing:-.045em;margin
 </main>
 <script>
 const groups=[
-{title:"1. Giấc ngủ & phục hồi",desc:"Ưu tiên hàng đầu — giúp cơ thể và đầu óc hồi phục.",icon:"🌙",tasks:[
-["Giữ giờ ngủ và giờ thức tương đối ổn định","Tránh hôm ngủ quá muộn, hôm lại dậy quá sớm."],
-["Dành đủ thời gian ngủ","Nếu đang ở tuổi vị thành niên, hướng tới 8–10 tiếng mỗi đêm."],
-["Ngừng học và giảm màn hình trước khi ngủ","Thử dành 30–60 phút cuối ngày để thư giãn."],
-["Không uống caffeine vào chiều tối","Nếu uống cà phê/trà, ưu tiên buổi sáng."]
+{title:"1. Điều chỉnh giấc ngủ",desc:"Ưu tiên số 1",icon:"🌙",tasks:[
+["Cố gắng lên giường trước 22:30–23:00",""],["Duy trì giờ thức dậy cố định",""],["Đảm bảo ngủ 8–10 tiếng nếu bạn đang ở tuổi vị thành niên",""],["Không học bù bằng cách thức đến 1–2 giờ sáng",""],["Không sử dụng điện thoại trong 30–60 phút trước khi ngủ",""],["Hạn chế caffeine vào buổi chiều và tối",""]
 ]},
-{title:"2. Điện thoại & nội dung ngắn",desc:"Giảm những lần bị kéo khỏi việc đang làm.",icon:"📵",tasks:[
-["Không mở TikTok / Shorts ngay sau khi thức dậy","Bắt đầu buổi sáng mà không lướt video ngắn."],
-["Đặt giới hạn video ngắn trong ngày","Thử mục tiêu 30–45 phút/ngày; điều chỉnh cho phù hợp."],
-["Để điện thoại xa tầm tay khi học","Tắt thông báo không cần thiết hoặc bật chế độ tập trung."],
-["Không dùng video ngắn trong giờ nghỉ học","Nghỉ bằng cách đứng dậy, uống nước hoặc nhìn xa."]
-]},
-{title:"3. Học tập & rèn sự tập trung",desc:"Tập trung từng bước, không ép bản thân ngồi lì hàng giờ.",icon:"📚",tasks:[
-["Viết rõ một việc quan trọng nhất cần hoàn thành","Chỉ chọn một nhiệm vụ để bắt đầu."],
-["Học theo phiên 25 phút + nghỉ 5 phút","Nếu khó quá, bắt đầu bằng 10–15 phút."],
-["Chỉ mở tài liệu và tab thật sự cần thiết","Tránh vừa học vừa chuyển qua nhiều việc."],
-["Khi xao nhãng, ghi ý nghĩ ra giấy rồi quay lại","Không cần cố gạt suy nghĩ đi bằng mọi giá."],
-["Đọc hoặc học sâu 10–15 phút không đa nhiệm","Tăng thời lượng từ từ khi thấy dễ hơn."]
-]},
-{title:"4. Giảm căng thẳng & sắp xếp suy nghĩ",desc:"Giải phóng đầu óc khỏi việc phải nhớ quá nhiều thứ.",icon:"🧠",tasks:[
-["Viết danh sách việc cần làm","Ghi các việc đang khiến bạn bận tâm."],
-["Chọn tối đa 3 ưu tiên trong ngày","Việc chưa cần làm ngay có thể để sang hôm khác."],
-["Dành 10 phút cuối ngày để lên kế hoạch ngày mai","Ghi việc cần làm và thời điểm bắt đầu."],
-["Có một khoảng nghỉ thật sự trong ngày","Không biến mọi giờ nghỉ thành thời gian lướt mạng."]
-]},
-{title:"5. Vận động & chăm sóc cơ thể",desc:"Giúp tỉnh táo hơn và giảm thời gian ngồi liên tục.",icon:"🚶",tasks:[
-["Đi bộ hoặc vận động ít nhất 20–30 phút","Chọn hoạt động phù hợp với thể trạng."],
-["Ra ngoài tiếp xúc ánh sáng ban ngày","Có thể đi bộ nhẹ 10–20 phút vào buổi sáng."],
-["Uống nước và ăn đủ bữa","Không bỏ bữa vì mải học."],
-["Đứng dậy, đổi tư thế sau mỗi khoảng học","Tránh ngồi liên tục quá lâu."]
-]},
-{title:"6. Đọc sách & rèn khả năng chú ý",desc:"Tạo thói quen đọc sâu, chậm và hiểu nội dung thay vì đọc cho đủ.",icon:"📖",tasks:[
-["Dành 10–15 phút đọc sách mỗi ngày","Chọn thời điểm dễ duy trì, chẳng hạn trước khi ngủ hoặc sau giờ học."],
-["Đọc sách giấy hoặc tắt thông báo khi đọc","Để điện thoại xa tầm tay, không chuyển qua lại giữa các ứng dụng."],
-["Đọc chậm và cố gắng hiểu ý chính","Không cần chạy theo số trang; có thể đọc lại đoạn chưa rõ."],
-["Ghi lại 1–3 điều đáng nhớ sau khi đọc","Có thể là một ý tưởng, kiến thức mới hoặc câu hỏi bạn muốn tìm hiểu."],
-["Tăng thời gian đọc từ từ khi đã quen","Bắt đầu 10–15 phút, sau đó nâng lên 20–30 phút nếu thấy thoải mái."]
+{title:"2. Kiểm soát Brain Rot",desc:"Ưu tiên cao",icon:"📵",tasks:[
+["Giảm TikTok, Shorts, Reels xuống tối đa 30–45 phút/ngày",""],["Không xem video ngắn ngay sau khi thức dậy",""],["Không xem video trong giờ nghỉ giữa các phiên học",""],["Không vừa học vừa xem YouTube",""],["Tắt thông báo các ứng dụng không cần thiết",""],["Để điện thoại xa bàn học",""]
+],note:"Mẹo: Khi nghỉ giải lao, hãy đứng dậy, đi lại hoặc uống nước thay vì mở điện thoại."},
+{title:"3. Rèn luyện khả năng tập trung",desc:"Rất quan trọng",icon:"📚",tasks:[
+["Học theo phương pháp 25 phút tập trung + 5 phút nghỉ",""],["Mỗi lần chỉ mở một nhiệm vụ",""],["Đóng các tab không liên quan",""],["Đọc sách 15 phút mỗi ngày",""],["Không chuyển sang việc khác khi chưa hoàn thành phiên học",""],["Khi suy nghĩ lan man, ghi nhanh suy nghĩ ra giấy rồi quay lại bài học",""]
+],note:"Đừng ép bản thân tập trung 2–3 tiếng ngay lập tức. Hãy tăng dần thời gian nếu bạn cảm thấy thoải mái."},
+{title:"4. Giảm suy nghĩ lan man và căng thẳng",desc:"Sắp xếp suy nghĩ, giảm áp lực mỗi ngày.",icon:"🧠",tasks:[
+["Mỗi tối dành 10 phút ghi lại những việc cần làm ngày mai",""],["Chia công việc lớn thành những nhiệm vụ nhỏ",""],["Không cố giải quyết mọi vấn đề cùng một lúc",""],["Dành 10–15 phút mỗi ngày để thư giãn không có màn hình",""],["Khi trò chuyện, thử chủ động lắng nghe và nhắc lại ý chính của người đối diện",""],["Dành thời gian cho những sở thích bạn thực sự yêu thích",""]
+],note:"Một mẹo hữu ích: Trước khi học, viết ra đúng 3 việc quan trọng nhất cần hoàn thành trong ngày. Đừng lập danh sách 20 việc khiến bản thân thêm áp lực."},
+{title:"5. Cải thiện sức khỏe thể chất",desc:"Chăm sóc cơ thể để hỗ trợ sự tỉnh táo và khả năng tập trung.",icon:"🚶",tasks:[
+["Vận động 20–30 phút mỗi ngày",""],["Tiếp xúc ánh sáng tự nhiên vào buổi sáng",""],["Ăn đủ bữa, không bỏ bữa sáng",""],["Uống đủ nước",""],["Hạn chế ngồi liên tục nhiều giờ",""]
 ]}
-
 ];
 const KEY="focus-reset-categories-v2",ids=groups.flatMap((g,gi)=>g.tasks.map((_,ti)=>`g${gi}t${ti}`));
 let store=JSON.parse(localStorage.getItem(KEY)||"{}"),current=1;
@@ -105,12 +71,11 @@ function render(){
  const d=getDay();el("categories").innerHTML="";
  groups.forEach((g,gi)=>{let section=document.createElement("section");section.className="category";let count=g.tasks.filter((_,ti)=>d.checks[`g${gi}t${ti}`]).length;
  section.innerHTML=`<div class="cathead"><div class="ico">${g.icon}</div><div><h2>${g.title}</h2><p>${g.desc}</p></div><span class="catcount">${count}/${g.tasks.length}</span></div><div class="tasks"></div>`;
- let box=section.querySelector(".tasks");g.tasks.forEach((t,ti)=>{let id=`g${gi}t${ti}`,row=document.createElement("div");row.className="task"+(d.checks[id]?" checked":"");let cb=document.createElement("input");cb.type="checkbox";cb.checked=!!d.checks[id];cb.id=id;let lab=document.createElement("label");lab.htmlFor=id;lab.innerHTML=`<b>${t[0]}</b><small>${t[1]}</small>`;cb.onchange=()=>{getDay().checks[id]=cb.checked;save()};row.append(cb,lab);box.append(row)});el("categories").append(section)});
- ["focus","energy","stress","sleep","memo","bookTitle","readPages","readMinutes","readingMood","takeaway"].forEach(id=>el(id).value=d.fields?.[id]??"");
+ let box=section.querySelector(".tasks");g.tasks.forEach((t,ti)=>{let id=`g${gi}t${ti}`,row=document.createElement("div");row.className="task"+(d.checks[id]?" checked":"");let cb=document.createElement("input");cb.type="checkbox";cb.checked=!!d.checks[id];cb.id=id;let lab=document.createElement("label");lab.htmlFor=id;lab.innerHTML=`<b>${t[0]}</b>${t[1]?`<small>${t[1]}</small>`:""}`;cb.onchange=()=>{getDay().checks[id]=cb.checked;save()};row.append(cb,lab);box.append(row)});if(g.note){let n=document.createElement("div");n.className="note";n.textContent=g.note;section.append(n)}el("categories").append(section)});
+ ["focus","energy","stress","sleep","memo"].forEach(id=>el(id).value=d.fields?.[id]??"");
 }
-function saveFields(show=true){let d=getDay();d.fields={};["focus","energy","stress","sleep","memo","bookTitle","readPages","readMinutes","readingMood","takeaway"].forEach(id=>d.fields[id]=el(id).value);localStorage.setItem(KEY,JSON.stringify(store));if(show){el("save").textContent="Đã lưu ✓";setTimeout(()=>el("save").textContent="Lưu đánh giá",1300)}}
+function saveFields(show=true){let d=getDay();d.fields={};["focus","energy","stress","sleep","memo"].forEach(id=>d.fields[id]=el(id).value);localStorage.setItem(KEY,JSON.stringify(store));if(show){el("save").textContent="Đã lưu ✓";setTimeout(()=>el("save").textContent="Lưu đánh giá",1300)}}
 el("save").onclick=()=>saveFields(true);
-el("saveReading").onclick=()=>{saveFields(false);el("saveReading").textContent="Đã lưu ✓";setTimeout(()=>el("saveReading").textContent="Lưu nhật ký đọc sách",1300)};
 el("clear").onclick=()=>{if(confirm("Xóa toàn bộ checklist và đánh giá của ngày "+current+"?")){delete store[current];save()}};
 render();
 </script></body></html>
