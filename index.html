@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f5f4ef">
+<title>Focus Reset — Kế hoạch 14 ngày</title>
+<style>
+:root{--bg:#f5f4ef;--card:#fff;--ink:#20231f;--muted:#73786f;--line:#e7e8e1;--green:#52765b;--pale:#eaf1e9;--shadow:0 8px 28px #2633220b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.wrap{max-width:850px;margin:auto;padding:26px 17px 55px}
+.top{display:flex;justify-content:space-between;align-items:center}.brand{font-size:12px;letter-spacing:.14em;font-weight:800;color:var(--green)}.tag{font-size:12px;color:var(--muted);border:1px solid var(--line);padding:5px 10px;border-radius:30px}
+h1{font-size:clamp(29px,5vw,43px);line-height:1.08;letter-spacing:-.045em;margin:24px 0 10px}.lead{color:var(--muted);margin:0 0 22px;max-width:680px}
+.hero{background:#263d30;color:#fff;border-radius:20px;padding:21px;margin:18px 0}.hero small{color:#c8d7c9}.hero strong{display:block;font-size:29px}.bar{height:9px;background:#ffffff30;border-radius:20px;overflow:hidden;margin-top:12px}.bar i{display:block;width:0;height:100%;background:#c9e0c7;transition:width .2s}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat,.panel{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:16px;box-shadow:var(--shadow)}.stat span{display:block;color:var(--muted);font-size:12px}.stat b{font-size:22px}
+.panel{margin-top:14px}.panelhead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}.panel h2{font-size:18px;margin:0;letter-spacing:-.02em}.muted{font-size:12px;color:var(--muted)}
+.days{display:flex;gap:7px;overflow:auto;padding:2px 0 4px}.day{flex:0 0 40px;height:40px;border:1px solid var(--line);background:#fff;border-radius:11px;color:var(--muted);font-weight:700}.day.active{background:var(--green);color:white;border-color:var(--green)}.day.done{box-shadow:inset 0 -4px #a9c7a8}
+.category{margin-top:14px;background:white;border:1px solid var(--line);border-radius:17px;overflow:hidden;box-shadow:var(--shadow)}.cathead{padding:15px 16px 10px;display:flex;align-items:center;gap:11px}.ico{width:36px;height:36px;display:grid;place-items:center;background:var(--pale);border-radius:11px;font-size:18px}.cathead h2{font-size:17px;margin:0}.cathead p{font-size:12px;color:var(--muted);margin:1px 0 0}.catcount{margin-left:auto;font-size:12px;color:var(--muted);white-space:nowrap}
+.tasks{padding:0 16px 10px}.task{display:flex;gap:11px;padding:11px 0;border-top:1px solid var(--line);align-items:flex-start}.task input{appearance:none;flex:0 0 21px;width:21px;height:21px;border:1.5px solid #b8beb4;border-radius:7px;margin:2px 0 0;background:#fff}.task input:checked{background:var(--green);border-color:var(--green)}.task input:checked:after{content:"✓";display:block;color:white;text-align:center;line-height:19px;font-weight:800}.task label{flex:1;cursor:pointer}.task b{display:block;font-size:14px}.task small{display:block;color:var(--muted);font-size:12px;margin-top:2px}.task.checked b{text-decoration:line-through;color:#92988e}
+.note{background:var(--pale);color:#35513b;padding:12px 14px;border-radius:12px;font-size:13px;margin:8px 16px 15px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:11px}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:4px}.field input,.field textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px;font:inherit;background:#fff}.field textarea{min-height:72px;resize:vertical}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}button{cursor:pointer}.primary{background:var(--green);color:white;border:0;padding:10px 14px;border-radius:10px;font-weight:700}.secondary{background:white;border:1px solid var(--line);padding:9px 12px;border-radius:10px}.notice{font-size:13px;color:var(--muted);line-height:1.6}.foot{text-align:center;color:var(--muted);font-size:11px;margin:22px 0}
+@media(max-width:560px){.wrap{padding:19px 13px 40px}.fields{grid-template-columns:1fr}.stat{padding:13px}.category{margin-top:11px}}
+</style></head>
+<body><main class="wrap">
+<div class="top"><div class="brand">FOCUS RESET</div><div class="tag">KẾ HOẠCH 14 NGÀY</div></div>
+<h1>Lấy lại khả năng tập trung.</h1>
+<p class="lead">Chia mục tiêu thành từng phần rõ ràng để bạn dễ thực hiện mỗi ngày. Không cần làm hoàn hảo — hãy theo dõi tiến bộ của mình.</p>
+<section class="hero"><small>TỔNG TIẾN ĐỘ</small><strong><span id="percent">0</span>% hoàn thành</strong><small id="totalText">0 / 0 nhiệm vụ</small><div class="bar"><i id="bar"></i></div></section>
+<div class="stats"><div class="stat"><span>Ngày đang xem</span><b id="dayTitle">Ngày 1 / 14</b></div><div class="stat"><span>Số ngày đã bắt đầu</span><b id="daysDone">0 / 14</b></div></div>
+<section class="panel"><div class="panelhead"><h2>Chọn ngày</h2><span class="muted">Chạm để xem / sửa</span></div><div class="days" id="days"></div></section>
+<div id="categories"></div>
+<section class="panel">
+<div class="panelhead"><h2>Đánh giá cuối ngày</h2><span class="muted">Ghi nhận, không phán xét</span></div>
+<div class="fields">
+<div class="field"><label for="focus">Tập trung (1–5)</label><input id="focus" type="number" min="1" max="5" placeholder="1 đến 5"></div>
+<div class="field"><label for="energy">Tỉnh táo buổi sáng (1–5)</label><input id="energy" type="number" min="1" max="5" placeholder="1 đến 5"></div>
+<div class="field"><label for="stress">Căng thẳng (1–5)</label><input id="stress" type="number" min="1" max="5" placeholder="1 đến 5"></div>
+<div class="field"><label for="sleep">Thời gian ngủ (giờ)</label><input id="sleep" type="number" min="0" max="24" step=".5" placeholder="Ví dụ 7.5"></div>
+<div class="field" style="grid-column:1/-1"><label for="memo">Ghi chú / điều làm mình xao nhãng</label><textarea id="memo" placeholder="Hôm nay mình thấy thế nào? Điều gì giúp mình tập trung hơn?"></textarea></div>
+</div><div class="actions"><button class="primary" id="save">Lưu đánh giá</button><button class="secondary" id="clear">Xóa dữ liệu ngày này</button></div>
+</section>
+<section class="panel"><h2>Điều cần nhớ</h2><p class="notice">Đây là kế hoạch hỗ trợ thói quen, không phải công cụ chẩn đoán. Vì tình trạng giảm tập trung, mệt dù ngủ và khó theo dõi cuộc trò chuyện đã kéo dài khoảng một tháng, hãy chia sẻ với phụ huynh/người giám hộ và sắp xếp trao đổi với bác sĩ hoặc chuyên viên y tế. Đừng chờ đủ 14 ngày mới tìm hỗ trợ. Nếu xuất hiện lú lẫn đột ngột, đau đầu dữ dội bất thường, yếu/tê một bên, nói khó hoặc rối loạn thị giác, cần được cấp cứu.</p></section>
+<div class="foot">Dữ liệu được lưu trên trình duyệt của thiết bị này. Nếu đổi trình duyệt hoặc thiết bị, dữ liệu không tự đồng bộ.</div>
+</main>
+<script>
+const groups=[
+{title:"1. Giấc ngủ & phục hồi",desc:"Ưu tiên hàng đầu — giúp cơ thể và đầu óc hồi phục.",icon:"🌙",tasks:[
+["Giữ giờ ngủ và giờ thức tương đối ổn định","Tránh hôm ngủ quá muộn, hôm lại dậy quá sớm."],
+["Dành đủ thời gian ngủ","Nếu đang ở tuổi vị thành niên, hướng tới 8–10 tiếng mỗi đêm."],
+["Ngừng học và giảm màn hình trước khi ngủ","Thử dành 30–60 phút cuối ngày để thư giãn."],
+["Không uống caffeine vào chiều tối","Nếu uống cà phê/trà, ưu tiên buổi sáng."]
+]},
+{title:"2. Điện thoại & nội dung ngắn",desc:"Giảm những lần bị kéo khỏi việc đang làm.",icon:"📵",tasks:[
+["Không mở TikTok / Shorts ngay sau khi thức dậy","Bắt đầu buổi sáng mà không lướt video ngắn."],
+["Đặt giới hạn video ngắn trong ngày","Thử mục tiêu 30–45 phút/ngày; điều chỉnh cho phù hợp."],
+["Để điện thoại xa tầm tay khi học","Tắt thông báo không cần thiết hoặc bật chế độ tập trung."],
+["Không dùng video ngắn trong giờ nghỉ học","Nghỉ bằng cách đứng dậy, uống nước hoặc nhìn xa."]
+]},
+{title:"3. Học tập & rèn sự tập trung",desc:"Tập trung từng bước, không ép bản thân ngồi lì hàng giờ.",icon:"📚",tasks:[
+["Viết rõ một việc quan trọng nhất cần hoàn thành","Chỉ chọn một nhiệm vụ để bắt đầu."],
+["Học theo phiên 25 phút + nghỉ 5 phút","Nếu khó quá, bắt đầu bằng 10–15 phút."],
+["Chỉ mở tài liệu và tab thật sự cần thiết","Tránh vừa học vừa chuyển qua nhiều việc."],
+["Khi xao nhãng, ghi ý nghĩ ra giấy rồi quay lại","Không cần cố gạt suy nghĩ đi bằng mọi giá."],
+["Đọc hoặc học sâu 10–15 phút không đa nhiệm","Tăng thời lượng từ từ khi thấy dễ hơn."]
+]},
+{title:"4. Giảm căng thẳng & sắp xếp suy nghĩ",desc:"Giải phóng đầu óc khỏi việc phải nhớ quá nhiều thứ.",icon:"🧠",tasks:[
+["Viết danh sách việc cần làm","Ghi các việc đang khiến bạn bận tâm."],
+["Chọn tối đa 3 ưu tiên trong ngày","Việc chưa cần làm ngay có thể để sang hôm khác."],
+["Dành 10 phút cuối ngày để lên kế hoạch ngày mai","Ghi việc cần làm và thời điểm bắt đầu."],
+["Có một khoảng nghỉ thật sự trong ngày","Không biến mọi giờ nghỉ thành thời gian lướt mạng."]
+]},
+{title:"5. Vận động & chăm sóc cơ thể",desc:"Giúp tỉnh táo hơn và giảm thời gian ngồi liên tục.",icon:"🚶",tasks:[
+["Đi bộ hoặc vận động ít nhất 20–30 phút","Chọn hoạt động phù hợp với thể trạng."],
+["Ra ngoài tiếp xúc ánh sáng ban ngày","Có thể đi bộ nhẹ 10–20 phút vào buổi sáng."],
+["Uống nước và ăn đủ bữa","Không bỏ bữa vì mải học."],
+["Đứng dậy, đổi tư thế sau mỗi khoảng học","Tránh ngồi liên tục quá lâu."]
+]}
+];
+const KEY="focus-reset-categories-v2",ids=groups.flatMap((g,gi)=>g.tasks.map((_,ti)=>`g${gi}t${ti}`));
+let store=JSON.parse(localStorage.getItem(KEY)||"{}"),current=1;
+const el=id=>document.getElementById(id);
+function getDay(){return store[current]||(store[current]={checks:{},fields:{}})}
+function save(){localStorage.setItem(KEY,JSON.stringify(store));render()}
+function render(){
+ el("days").innerHTML="";
+ for(let i=1;i<=14;i++){let b=document.createElement("button");b.className="day"+(i===current?" active":"")+(store[i]&&ids.some(id=>store[i].checks?.[id])?" done":"");b.textContent=i;b.onclick=()=>{saveFields(false);current=i;render()};el("days").append(b)}
+ el("dayTitle").textContent=`Ngày ${current} / 14`;
+ let done=0;for(let d=1;d<=14;d++)done+=ids.filter(id=>store[d]?.checks?.[id]).length;
+ let total=ids.length*14,p=Math.round(done/total*100);el("percent").textContent=p;el("bar").style.width=p+"%";el("totalText").textContent=`${done} / ${total} nhiệm vụ đã hoàn thành`;el("daysDone").textContent=Object.keys(store).filter(k=>ids.some(id=>store[k].checks?.[id])).length+" / 14";
+ const d=getDay();el("categories").innerHTML="";
+ groups.forEach((g,gi)=>{let section=document.createElement("section");section.className="category";let count=g.tasks.filter((_,ti)=>d.checks[`g${gi}t${ti}`]).length;
+ section.innerHTML=`<div class="cathead"><div class="ico">${g.icon}</div><div><h2>${g.title}</h2><p>${g.desc}</p></div><span class="catcount">${count}/${g.tasks.length}</span></div><div class="tasks"></div>`;
+ let box=section.querySelector(".tasks");g.tasks.forEach((t,ti)=>{let id=`g${gi}t${ti}`,row=document.createElement("div");row.className="task"+(d.checks[id]?" checked":"");let cb=document.createElement("input");cb.type="checkbox";cb.checked=!!d.checks[id];cb.id=id;let lab=document.createElement("label");lab.htmlFor=id;lab.innerHTML=`<b>${t[0]}</b><small>${t[1]}</small>`;cb.onchange=()=>{getDay().checks[id]=cb.checked;save()};row.append(cb,lab);box.append(row)});el("categories").append(section)});
+ ["focus","energy","stress","sleep","memo"].forEach(id=>el(id).value=d.fields?.[id]??"");
+}
+function saveFields(show=true){let d=getDay();d.fields={};["focus","energy","stress","sleep","memo"].forEach(id=>d.fields[id]=el(id).value);localStorage.setItem(KEY,JSON.stringify(store));if(show){el("save").textContent="Đã lưu ✓";setTimeout(()=>el("save").textContent="Lưu đánh giá",1300)}}
+el("save").onclick=()=>saveFields(true);
+el("clear").onclick=()=>{if(confirm("Xóa toàn bộ checklist và đánh giá của ngày "+current+"?")){delete store[current];save()}};
+render();
+</script></body></html>
